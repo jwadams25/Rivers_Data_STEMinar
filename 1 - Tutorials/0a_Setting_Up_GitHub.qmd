@@ -1,0 +1,201 @@
+---
+title: "Tutorial 0a: Setting Up Your GitHub Account"
+author: "YOUR NAME"
+editor: visual
+format:
+  gfm:
+    toc: true
+    toc_depth: 4
+---
+
+## Before You Begin
+
+This tutorial will walk you through creating a GitHub account and making your very first repository. **Read every step carefully** — don't skip ahead! Each step builds on the one before it.
+
+**What is GitHub?** Think of GitHub as Google Drive, but for code. It stores your work online so you can access it from any computer, keep track of every change you make, and share your work with others. Programmers all over the world use GitHub every day.
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+Any text highlighted in this red border will require you to **complete an action** (like clicking a button or typing something).
+:::
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #006CB3; border-radius: 5px;"}
+Any text highlighted in this blue border will **require you to answer a question**. You can type your response directly in the box with the blue border.
+:::
+
+------------------------------------------------------------------------
+
+## 1: Create Your GitHub Account
+
+### 1.1: Go to the GitHub Website
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  Open your web browser (Chrome or Safari — any one works).
+2.  In the address bar at the top, type [**github.com**](github.com) and press **Enter**.
+3.  You should see the GitHub homepage. Look for a **"Sign up"** button — it's usually in the top-right corner of the page.
+:::
+
+### 1.2: Start the Sign-Up Process
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  Click the **"Sign up"** button.
+2.  GitHub will give you the option to Continue with Google. Choose that option and enter your Rivers email account information.
+:::
+
+### 1.3: Choose a Username
+
+Your username is like your GitHub nickname — it's how other people will find you and see your work. Choose wisely because this will be visible to others.
+
+**Tips for picking a good username:**
+
+-   Keep it professional — this could end up on a college application or a job resume someday.
+-   Use something recognizable — your name or initials work well (for example: `jsmith2026` or `jane-s-codes`).
+-   Avoid anything inappropriate or hard to remember.
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  Type your chosen **username** into the box.
+2.  If the username is already taken, GitHub will let you know. Try adding numbers or changing it slightly until you find one that's available.
+3.  Click **Continue**.
+:::
+
+### 1.5: Email Preferences and Verification
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  GitHub may ask if you want to receive product updates by email. You can type **"n"** (for no) if you don't want extra emails, or **"y"** if you do. This is totally up to you.
+2.  Click **Continue**.
+3.  GitHub will ask you to **verify that you're a real person** by completing a short puzzle (this is called a CAPTCHA). Follow the on-screen instructions to solve it.
+4.  Once you've solved the puzzle, click **"Create account"**.
+:::
+
+### 1.6: Verify Your Email Address
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  GitHub just sent a verification email to the address you provided. **Open a new tab** and go to your email inbox.
+2.  Look for an email from GitHub. It might take a minute or two to arrive. Check your **spam or junk folder** if you don't see it right away.
+3.  Open the email and click the **verification link** or enter the **code** GitHub provided.
+4.  Once verified, go back to the GitHub tab in your browser.
+:::
+
+### 1.7: Skip the Personalization (Optional)
+
+After verifying your email, GitHub might ask you a few questions about what you plan to use GitHub for — things like your experience level or what kind of projects you're interested in.
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  You can answer these questions if you'd like, or look for a **"Skip this step"** or **"Skip personalization"** link to move on.
+:::
+
+**Congratulations — you now have a GitHub account!** You should see your GitHub dashboard. Take a moment to look around.
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #006CB3; border-radius: 5px;"}
+1.  What username did you choose for your GitHub account?
+:::
+
+------------------------------------------------------------------------
+
+## 2: Create Your First Repository
+
+A **repository** (or "repo" for short) is like a folder that lives on GitHub. It holds all the files for a project and keeps track of every change you make to those files. Think of it like a super-powered folder that remembers everything.
+
+### 2.1: Navigate to Create a New Repository
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  Make sure you're logged in to GitHub. You should see your profile icon (a small circle) in the **top-right corner** of the page.
+2.  Click the **"+"** icon (it's right next to your profile icon in the top-right corner).
+3.  From the dropdown menu, click **"New repository"**.
+:::
+
+### 2.2: Name Your Repository
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  In the **"Repository name"** box, type a name for your repository. For this class, name it: **`intro-stem-seminar`**
+2.  Make sure there are **no spaces** in the name. Use hyphens (`-`) instead of spaces.
+:::
+
+### 2.3: Add a Description (Optional but Recommended)
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  In the **"Description"** box, type a short sentence about what this repository is for. For example: `My work for Intro to STEM Seminar`
+:::
+
+### 2.4: Choose Public or Private
+
+You'll see two options: **Public** and **Private**.
+
+-   **Public** means anyone on the internet can see your repository (but only you can make changes to it).
+-   **Private** means only you (and people you invite) can see it.
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  For this class, select **Public**. This will allow your teacher to see your work.
+:::
+
+### 2.5: Initialize the Repository
+
+This next part is important — it adds a few starting files to your repository so it's ready to use.
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  Check the box that says **"Add a README file"**. A README is a document that describes what your project is about. It's the first thing people see when they visit your repository.
+2.  You can leave the other options (".gitignore" and "license") alone for now — we don't need to worry about those yet.
+:::
+
+### 2.6: Create the Repository
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  Double-check that everything looks right:
+    -   Repository name: `intro-stem-seminar`
+    -   Visibility: Public
+    -   "Add a README file" is checked
+2.  Click the green **"Create repository"** button at the bottom of the page.
+:::
+
+**You just created your first repository!** GitHub will take you to your new repository's page. You should see your README file displayed on the page.
+
+### 2.7: Explore Your New Repository
+
+Take a moment to look around your new repository page. Here are some things you'll notice:
+
+-   **The repository name** is displayed at the top (it should say `your-username/intro-stem-seminar`).
+-   **The README.md file** is shown at the bottom of the page. Right now it just has the name of your repository, but you can edit it later to add more information.
+-   **The "Code" tab** is where all your files will live.
+-   **The green "Code" button** — you'll use this later to connect your repository to Positron.
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #006CB3; border-radius: 5px;"}
+3.  Go to your repository page. What is the full URL (web address) of your repository? It should look something like: `https://github.com/your-username/intro-stem-seminar`
+:::
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #006CB3; border-radius: 5px;"}
+4.  In your own words, what is a repository and why is it useful?
+:::
+
+------------------------------------------------------------------------
+
+## 3: Understanding Key GitHub Vocabulary
+
+Before moving on, let's make sure you understand some important terms you'll be using all the time.
+
+| Term | What It Means |
+|:------------------|:----------------------------------------------------|
+| **Repository** | A folder for your project that lives on GitHub and tracks all changes. |
+| **Commit** | A save point. When you "commit" your work, you're saving a snapshot of your files at that moment. |
+| **Push** | Sending your saved work (commits) from your computer up to GitHub so it's stored online. |
+| **Pull** | Downloading the latest version of files from GitHub to your computer. |
+| **Clone** | Making a copy of a GitHub repository on your own computer so you can work on it locally. |
+| **README** | A special file that describes your project. It's the first thing visitors see on your repository page. |
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #006CB3; border-radius: 5px;"}
+5.  Explain the difference between a **commit** and a **push** in your own words. (Hint: Think about saving a document on your computer vs. uploading it to the cloud.)
+:::
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #006CB3; border-radius: 5px;"}
+6.  Which GitHub term is most similar to "downloading"? Why?
+:::
+
+------------------------------------------------------------------------
+
+## 4: What's Next?
+
+Awesome work! You now have a GitHub account and your first repository. In the next tutorial (**Tutorial 0b**), you'll learn how to connect this repository to Positron so you can write code on your computer and send it up to GitHub.
+
+**Before you move on, make sure:**
+
+-   You can log in to your GitHub account.
+-   You know your username and password.
+-   You can find your `intro-stem-seminar` repository on your GitHub profile.

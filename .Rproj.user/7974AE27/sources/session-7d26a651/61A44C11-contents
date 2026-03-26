@@ -1,0 +1,38 @@
+---
+title: "Post Tutorial 1 Challenge: Furthering Exploring Loans"
+author: "YOUR NAME"
+editor: visual
+format: 
+  gfm:
+    fig-width: 8
+    fig-height: 4
+    toc: true
+    toc_depth: 4
+---
+
+## The Data
+
+For this challenge you will use the same `loan50` data that you explored in the first tutorial. Unlike the tutorial, which required you to edit a lot of code and provided you with direction as to which questions to explore, this challenge will require you to do those things. You will use and build off of the skills developed in the tutorial to further understand the sample of loans from lending club.
+
+## Packages Needed
+
+```{r packages needed}
+library(tidyverse)
+library(openintro)
+```
+
+## **Part 1: Exploring Purpose**
+
+In the tutorial, you uncovered the leading reasons why people are getting loans from lending club. Now, focus in on the top two, debt consolidation and credit card, and use your new EDA skills to uncover more information about loans taken out for these purposes.
+
+When exploring...
+
+-   write down your questions
+
+-   keep your code chunks organized
+
+-   take note of what you learn from the data visualizations and statistics you generate.
+
+## **Part 2: Setting You Free to Explore**
+
+For this part of the challenge, write down one key insight you learned about our sample of loans from the tutorial. Once you have that insight down, dive deeper into the data to further explore follow-up questions that arrive.

@@ -1,0 +1,68 @@
+/*-- scss:defaults --*/
+
+$font-family-sans-serif: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$presentation-heading-font: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$body-color: #2d3436;
+$link-color: #006CB3;
+$presentation-heading-color: #2d3436;
+$code-block-bg: #f8f9fa;
+$code-color: #e74c3c;
+
+/*-- scss:rules --*/
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal h1, .reveal h2, .reveal h3 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.reveal h2 {
+  border-bottom: 3px solid #006CB3;
+  padding-bottom: 0.3em;
+  margin-bottom: 0.8em;
+}
+
+.reveal pre {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  font-size: 0.65em;
+}
+
+.reveal code {
+  font-family: "Fira Code", "Source Code Pro", monospace;
+}
+
+.reveal .slide-number {
+  font-size: 0.7em;
+  color: #636e72;
+}
+
+.reveal blockquote {
+  border-left: 4px solid #006CB3;
+  background: #f0f7ff;
+  padding: 1em 1.5em;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  margin: 1em 0;
+}
+
+.reveal section[data-background-color="#006CB3"] h1 {
+  color: white;
+  text-shadow: none;
+}
+
+.reveal .columns {
+  margin-top: 0.5em;
+}
+
+.reveal ul li {
+  margin-bottom: 0.4em;
+  line-height: 1.5;
+}
+
+.reveal .fragment.highlight-current-blue.current-fragment {
+  color: #006CB3;
+}

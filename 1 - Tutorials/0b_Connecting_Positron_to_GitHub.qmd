@@ -1,0 +1,476 @@
+---
+title: "Tutorial 0b: Connecting Positron to GitHub"
+author: "YOUR NAME"
+editor: visual
+format:
+  gfm:
+    toc: true
+    toc_depth: 4
+---
+
+## Before You Begin
+
+This tutorial will walk you through connecting Positron (the program where you'll write your code) to the GitHub repository you created in **Tutorial 0a**. By the end, you'll know how to save your work to GitHub using **commits** and **pushes**.
+
+**Make sure you've completed Tutorial 0a first.** You'll need your GitHub account and your `intro-stem-seminar` repository ready to go.
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+Any text highlighted in this red border will require you to **complete an action** (like clicking a button or typing something).
+:::
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #006CB3; border-radius: 5px;"}
+Any text highlighted in this blue border will **require you to answer a question**. You can type your response directly in the box with the blue border.
+:::
+
+------------------------------------------------------------------------
+
+## 1: What is Positron?
+
+Positron is a program (also called an IDE, which stands for **Integrated Development Environment**) that lets you write and run code. Think of it like Microsoft Word, but instead of writing essays, you're writing code. Positron is built specifically for working with data using languages like R and Python.
+
+Here's the key idea: **you write code in Positron on your computer, and then you send that work up to GitHub so it's saved online.** That way, your work is backed up and your teacher can see it.
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #006CB3; border-radius: 5px;"}
+1.  In your own words, what is the relationship between Positron and GitHub? (Hint: One is where you do the work, and the other is where you store it.)
+:::
+
+------------------------------------------------------------------------
+
+## 2: Install Git on Your Computer
+
+Before Positron can talk to GitHub, you need a program called **Git** installed on your computer. Git is the tool that actually handles sending files back and forth between your computer and GitHub. You won't use Git directly very often — Positron will use it behind the scenes — but it needs to be there.
+
+### 2.1: Check If Git Is Already Installed
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  Open Positron on your computer.
+2.  At the bottom of the Positron window, look for a tab called **"Terminal"**. Click on it. The Terminal is a place where you can type commands directly to your computer.
+3.  Type the following command exactly as shown and press **Enter**:
+
+``` bash
+git --version
+```
+
+4.  If Git is installed, you'll see something like `git version 2.39.0` (the numbers might be different — that's fine). If you see this, **skip ahead to Section 3**.
+5.  If you see an error message like `git: command not found`, that means Git isn't installed yet. Continue to Section 2.2.
+:::
+
+### 2.2: Download and Install Git
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  Open your web browser and go to [**git-scm.com**](git-scm.com).
+2.  Click the **"Download"** button. The website should automatically detect whether you're on Windows or Mac.
+3.  **If you're on Windows:** Open the downloaded file and follow the installer. You can click **"Next"** through most of the options — the default settings are fine. Make sure the option **"Git from the command line and also from 3rd-party software"** is selected (it usually is by default).
+4.  **If you're on Mac:** Open the downloaded file and follow the instructions. You may need to enter your computer's password to allow the installation. If Git still doesn't install, open Terminal (you can find it in Applications → Utilities) and type `xcode-select --install`, then press Enter and follow the prompts.
+5.  Once the installation is done, **close Positron completely** and then **reopen it**.
+6.  Go back to the **Terminal** tab and type `git --version` again to make sure it worked.
+:::
+
+### 2.3: Tell Git Who You Are
+
+Git needs to know your name and email so it can label your work. This is like putting your name on your paper before you turn it in.
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  In the **Terminal** tab in Positron, type the following command, but **replace** `Your Name` with your actual first and last name. Keep the quotation marks:
+
+``` bash
+git config --global user.name "Your Name"
+```
+
+2.  Press **Enter**.
+3.  Now type the following command, but **replace** the email with the **same email you used to create your GitHub account**. Keep the quotation marks:
+
+``` bash
+git config --global user.email "your-email@example.com"
+```
+
+4.  Press **Enter**.
+5.  To double-check that it worked, type:
+
+``` bash
+git config --global user.name
+git config --global user.email
+```
+
+6.  You should see your name and email printed back to you.
+:::
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #006CB3; border-radius: 5px;"}
+2.  Why do you think Git needs your name and email? (Hint: Think about group projects and knowing who did what.)
+:::
+
+------------------------------------------------------------------------
+
+## 3: Connect Your Existing Project Folder to GitHub
+
+You've already been working in Positron and have a project folder with files in it. Now you need to connect that existing folder to the GitHub repository you created in Tutorial 0a. This way, all the work you've already done (and everything you do from now on) can be saved to GitHub.
+
+Think of it like this: you already have a notebook full of notes on your desk. You just built a locker on GitHub. Now you need to tell your notebook where the locker is so you can start putting copies of your notes in there.
+
+### 3.1: Open Your Existing Project in Positron
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  Open **Positron** on your computer.
+2.  If your project isn't already open, go to **File → Open Folder** and navigate to the folder where you've been saving your work for this class. Open that folder.
+3.  You should see your existing files (like tutorials, data files, etc.) in the **Explorer** panel on the left side of Positron.
+:::
+
+### 3.2: Get Your Repository's URL from GitHub
+
+You need to grab the web address of the GitHub repository you created so that Positron knows where to send your files.
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  Open your web browser and go to **github.com**. Make sure you're logged in.
+2.  Click on your profile icon in the top-right corner, then click **"Your repositories"**.
+3.  Click on **intro-stem-seminar** to open your repository.
+4.  Look for the green **"Code"** button on the repository page. Click it.
+5.  A small dropdown will appear. Make sure the tab that says **"HTTPS"** is selected (it usually is by default).
+6.  You'll see a URL that looks something like: `https://github.com/your-username/intro-stem-seminar.git`
+7.  Click the **copy icon** (it looks like two overlapping squares) next to the URL to copy it to your clipboard. **Don't close this tab** — you'll need this URL in a moment.
+:::
+
+### 3.3: Initialize Git in Your Project Folder
+
+Right now, your project folder is just a regular folder on your computer — Git doesn't know it exists yet. You need to **initialize** Git in your folder, which basically means turning on Git's tracking power for that folder.
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  Go back to **Positron** and click on the **Terminal** tab at the bottom of the window.
+2.  Make sure the Terminal is pointed at your project folder. You should see the name of your folder in the Terminal prompt. If you're not sure, type the following and press **Enter**:
+
+``` bash
+pwd
+```
+
+This command stands for "print working directory" — it tells you what folder the Terminal is currently looking at. It should show the path to your project folder.
+
+3.  Now type the following command and press **Enter**:
+
+``` bash
+git init
+```
+
+You should see a message that says something like `Initialized empty Git repository in ...`. This means Git is now watching your folder.
+:::
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #006CB3; border-radius: 5px;"}
+3.  What message did you see after running `git init`? What do you think "initialized" means in this context?
+:::
+
+### 3.4: Connect Your Folder to Your GitHub Repository
+
+Now you need to tell Git where your GitHub repository is so it knows where to send your files when you push.
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  In the **Terminal**, type the following command, but **replace** the URL with the one you copied from GitHub in Step 3.2. Keep the quotation marks off — just paste the URL directly:
+
+``` bash
+git remote add origin https://github.com/your-username/intro-stem-seminar.git
+```
+
+2.  Press **Enter**. You won't see any message if it worked — that's normal. No news is good news!
+3.  To make sure it worked, type the following command and press **Enter**:
+
+``` bash
+git remote -v
+```
+
+4.  You should see two lines that both show your GitHub URL — one that says `(fetch)` and one that says `(push)`. This confirms your folder is now connected to your GitHub repository.
+:::
+
+**What does "remote" mean?** In Git, a **remote** is just a nickname for a location where your code is stored online. The name `origin` is the default nickname for your main GitHub repository. When you "push to origin," you're sending your work to GitHub.
+
+### 3.5: Pull Down the README File
+
+When you created your repository on GitHub, it came with a README file. Your local folder doesn't have that file yet, so you need to pull it down before you can push your work up. Think of it like syncing up before you start — you want both copies to be on the same page.
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  In the **Terminal**, type the following command and press **Enter**:
+
+``` bash
+git pull origin main --allow-unrelated-histories
+```
+
+2.  You might see some text scroll by — that's normal. Git is downloading the README file from GitHub and merging it with your local files.
+3.  If a text editor window pops up asking you to write a "merge commit message," you can simply close it or press **Ctrl + X** (or **Cmd + X** on Mac) if it opens in the Terminal. The default message is fine.
+:::
+
+**Why `--allow-unrelated-histories`?** This is a one-time thing. Because your local folder and your GitHub repository were created separately, Git sees them as two unrelated projects. This flag tells Git, "It's okay — merge them together." You won't need to use this flag again after this.
+
+### 3.6: Push Your Existing Work to GitHub
+
+Now let's send all of your existing files up to GitHub for the first time!
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  First, you need to **stage** all of your existing files. In the Terminal, type:
+
+``` bash
+git add .
+```
+
+The period (`.`) means "everything in this folder." This tells Git to track all of your files.
+
+2.  Press **Enter**.
+3.  Now create your first **commit** — a save point with a message. Type:
+
+``` bash
+git commit -m "Add existing project files"
+```
+
+4.  Press **Enter**. You'll see a list of all the files that were included in the commit.
+5.  Finally, **push** everything up to GitHub:
+
+``` bash
+git push -u origin main
+```
+
+6.  Press **Enter** and wait a few seconds.
+:::
+
+**What does `-u origin main` mean?** This tells Git two things: send your work to `origin` (your GitHub repository) and put it on the `main` branch (the main version of your project). The `-u` flag sets this as the default, so in the future you can just type `git push` without the extra words.
+
+### 3.7: Sign In to GitHub from Positron
+
+The first time you push to GitHub from Positron, it will ask you to sign in. This might happen during the push step above.
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  If a pop-up window appears asking you to **sign in to GitHub**, click **"Allow"** or **"Sign in with your browser"**.
+2.  Your web browser will open to a GitHub page asking you to authorize Positron. Click **"Authorize"**.
+3.  You may need to enter your GitHub **password**.
+4.  Once authorized, go back to Positron. You should be connected.
+5.  If the push didn't finish earlier because of the sign-in, run `git push -u origin main` again in the Terminal.
+:::
+
+### 3.8: Verify on GitHub
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  Open your web browser and go to your repository: `https://github.com/your-username/intro-stem-seminar`
+2.  **Refresh the page**.
+3.  You should now see **all of your project files** listed in the repository — not just the README anymore!
+:::
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #006CB3; border-radius: 5px;"}
+4.  Go to your repository page on GitHub. How many files do you see listed there now? Do they match the files you have in your Positron project folder?
+:::
+
+------------------------------------------------------------------------
+
+## 4: Tour of Positron's Git Features
+
+Now that your repository is connected, let's learn where the Git tools live inside Positron.
+
+### 4.1: The Source Control Panel
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  Look at the **left sidebar** in Positron. You'll see a column of icons.
+2.  Find the icon that looks like a **branching line** or **Y-shape** — this is the **Source Control** panel. Click on it.
+3.  This panel is where you'll see any changes you've made to your files. Right now, it should be empty because you haven't changed anything yet.
+:::
+
+### 4.2: The Terminal
+
+You already used the Terminal earlier to check your Git version. The Terminal will also be useful for some Git commands later on.
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  Make sure you can find the **Terminal** tab at the bottom of Positron. If you don't see it, go to the top menu and click **Terminal → New Terminal**.
+:::
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #006CB3; border-radius: 5px;"}
+5.  Look at the Source Control panel (the branching icon on the left). What do you currently see there? Why do you think it looks that way?
+:::
+
+------------------------------------------------------------------------
+
+## 5: Make Your First Change, Commit, and Push
+
+This is the most important section of this tutorial. You're going to practice the **three-step workflow** you'll use every time you want to save your work to GitHub:
+
+1.  **Save** your file (like you normally would).
+2.  **Commit** your changes (this creates a save point with a short description).
+3.  **Push** your changes (this sends your work from your computer up to GitHub).
+
+Think of it like this: saving is writing in your notebook, committing is putting a sticky note on the page that says what you wrote, and pushing is putting the notebook back on the shelf where everyone can see it.
+
+### 5.1: Create a New File
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  In Positron, go to **File → New File**.
+2.  Choose **Quarto Document** (or **Text File** if Quarto Document isn't an option).
+3.  A new blank file will open. Type the following into the file:
+
+``` markdown
+---
+title: "My First File"
+author: "YOUR NAME"
+---
+
+## Hello, GitHub!
+
+This is my first file that I'm going to push to GitHub.
+I'm learning how to use Positron and GitHub together.
+```
+
+4.  Replace `YOUR NAME` with your actual name.
+5.  Save the file by pressing **Ctrl + S** (Windows) or **Cmd + S** (Mac).
+6.  Name the file **`my_first_file.qmd`** and make sure it saves inside your `intro-stem-seminar` project folder.
+:::
+
+### 5.2: Stage Your Changes
+
+After saving, you need to tell Git which files you want to include in your next commit. This step is called **staging** — it's like putting items in a box before shipping the box.
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  Click on the **Source Control** panel (the branching icon on the left sidebar).
+2.  You should now see your file (`my_first_file.qmd`) listed under **"Changes"**. There will be a letter next to it — **U** means "untracked" (Git hasn't seen this file before).
+3.  Hover your mouse over the file name. You'll see a **"+"** icon appear.
+4.  Click the **"+"** icon to **stage** the file. The file will move from "Changes" up to **"Staged Changes"**.
+:::
+
+### 5.3: Commit Your Changes
+
+Now you'll create a **commit** — a save point with a message describing what you did.
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  At the top of the Source Control panel, you'll see a text box that says something like **"Message"** or **"Commit message"**.
+2.  Type a short, clear message describing what you did. For example: `Add my first file to the repository`
+3.  Click the **"Commit"** button (it might be a checkmark icon ✓ or a button that says "Commit").
+:::
+
+**Important rules for commit messages:**
+
+-   Keep them short (a few words to one sentence).
+-   Describe what you changed, not how you changed it.
+-   Good examples: `Add tutorial 1 answers`, `Fix histogram labels`, `Complete section 3 questions`
+-   Bad examples: `stuff`, `update`, `asdfghjkl`
+
+### 5.4: Push Your Changes to GitHub
+
+Your commit is saved on your computer, but GitHub doesn't know about it yet. You need to **push** it.
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  Look at the top of the Source Control panel or the bottom status bar in Positron. You should see an icon or text that says something like **"Sync Changes"** or an **up arrow** with a number (like ↑1, meaning you have 1 commit to push).
+2.  Click **"Sync Changes"** or the **push/up-arrow button**.
+3.  If this is your first push, Positron might ask you to sign in to GitHub again — follow the prompts if it does.
+4.  Wait a few seconds. Once it's done, the number next to the arrow should go away.
+:::
+
+### 5.5: Verify on GitHub
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  Open your web browser and go to your repository on GitHub: `https://github.com/your-username/intro-stem-seminar`
+2.  **Refresh the page**.
+3.  You should now see **`my_first_file.qmd`** listed in your repository along with the README file.
+4.  Click on the file name to see its contents. It should match exactly what you typed in Positron.
+:::
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #006CB3; border-radius: 5px;"}
+6.  Did your file appear on GitHub? Describe what you see on your repository page now.
+:::
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #006CB3; border-radius: 5px;"}
+7.  What commit message did you write? Why is it important to write clear commit messages?
+:::
+
+------------------------------------------------------------------------
+
+## 6: Practice the Workflow Again
+
+Repetition is the best way to learn! Let's go through the workflow one more time so it really sticks.
+
+### 6.1: Edit Your File
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  Open `my_first_file.qmd` in Positron (if it's not already open, you can find it in the **Explorer** panel on the left sidebar — it looks like a file/folder icon).
+2.  Add the following text at the bottom of the file:
+
+``` markdown
+## What I Learned Today
+
+Today I learned how to:
+
+- Create a GitHub account
+- Make a repository
+- Connect my existing project folder to GitHub
+- Commit and push my work to GitHub
+```
+
+3.  **Save** the file with **Ctrl + S** (Windows) or **Cmd + S** (Mac).
+:::
+
+### 6.2: Stage, Commit, and Push
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #FF585D; border-radius: 5px;"}
+1.  Open the **Source Control** panel. You should see `my_first_file.qmd` listed under "Changes" with the letter **M** next to it (M stands for "modified" — Git noticed you changed the file).
+2.  Click the **"+"** icon to **stage** the file.
+3.  Type a **commit message**: `Add what I learned section`
+4.  Click **"Commit"**.
+5.  Click **"Sync Changes"** or the **push button** to send it to GitHub.
+6.  Go to GitHub in your browser, refresh the page, and click on your file to confirm the changes are there.
+:::
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #006CB3; border-radius: 5px;"}
+8.  When you looked at the Source Control panel, the letter next to your file changed from **U** (the first time) to **M** (the second time). What do you think **U** and **M** stand for, and why were they different?
+:::
+
+------------------------------------------------------------------------
+
+## 7: Quick Reference — The GitHub Workflow
+
+Here's a summary of the steps you'll follow **every time** you want to save your work to GitHub. You'll be doing this a lot, so it's worth memorizing:
+
+| Step | What You Do | Where |
+|:-----------------|:------------------------------------|:-----------------|
+| 1 | **Save** your file | Ctrl+S / Cmd+S |
+| 2 | **Stage** the file (click the "+" icon) | Source Control panel |
+| 3 | **Write a commit message** describing what you changed | Source Control panel |
+| 4 | **Commit** (click the checkmark or Commit button) | Source Control panel |
+| 5 | **Push** (click Sync Changes or the up-arrow) | Source Control panel |
+
+**A good habit:** Commit and push your work every time you finish a section of a tutorial or make significant progress. Don't wait until the very end — if something goes wrong with your computer, you'll lose everything you haven't pushed.
+
+------------------------------------------------------------------------
+
+## 8: Troubleshooting Common Issues
+
+Here are some problems you might run into and how to fix them.
+
+### "I can't find the Source Control panel."
+
+Go to **View → Source Control** in the top menu. Or look for the branching Y-shaped icon in the left sidebar.
+
+### "My file doesn't show up in the Source Control panel."
+
+Make sure you **saved** the file first (Ctrl+S / Cmd+S). Also, make sure the file is saved inside your project folder (the `intro-stem-seminar` folder), not somewhere else on your computer.
+
+### "Git says 'please tell me who you are.'"
+
+You need to set your name and email in the Terminal. Go back to **Section 2.3** and follow those steps again.
+
+### "The push failed or I got an error."
+
+Try these things in order:
+
+1.  Make sure you're connected to the internet.
+2.  Make sure you're signed in to GitHub in Positron (look for an accounts icon in the bottom-left of Positron).
+3.  Ask your teacher for help — sometimes the error message gives a clue about what went wrong.
+
+### "I accidentally changed a file and want to undo it."
+
+In the Source Control panel, right-click the file and select **"Discard Changes"**. This will undo any changes you made since your last commit. **Be careful** — this cannot be undone.
+
+::: {style="color: black; background-color: white; padding: 15px; border: 5px solid #006CB3; border-radius: 5px;"}
+9.  In your own words, describe the full workflow for getting your work from Positron to GitHub. Explain it as if you were teaching a friend who has never done it before.
+:::
+
+------------------------------------------------------------------------
+
+## 9: What's Next?
+
+You're all set up and ready to go! From this point forward, every time you work on a tutorial or assignment in this class, you'll use this same workflow:
+
+1.  Open your project in Positron.
+2.  Do your work (write code, answer questions, etc.).
+3.  Save, stage, commit, and push to GitHub.
+
+**Remember:** Commit early, commit often. It's much better to have too many commits than too few. Think of each commit as a checkpoint in a video game — you always want one nearby in case you need to go back.
+
+You're now ready to move on to **Tutorial 1: Introduction to EDA**. Good luck, and have fun coding!

@@ -1,0 +1,483 @@
+---
+title: "Introduction to Exploratory Data Analysis"
+subtitle: "Getting to Know Your Data with R"
+author: "STEMINAR"
+format:
+  revealjs:
+    theme: [default, ../custom.scss]
+    slide-number: true
+    transition: slide
+    code-line-numbers: true
+    highlight-style: github
+    code-overflow: wrap
+    incremental: true
+    chalkboard: false
+    width: 1280
+    height: 720
+    fig-width: 8
+    fig-height: 4
+execute:
+  echo: true
+  eval: true
+  warning: false
+  message: false
+---
+
+## Welcome! {.noincremental}
+
+Today we will learn how to:
+
+-   Load and inspect data in R
+-   Clean and prepare data for analysis
+-   Visualize distributions with histograms and bar charts
+-   Compare groups using faceted plots
+-   Explore relationships with scatter plots and linear models
+-   Calculate and interpret summary statistics
+
+## What is EDA? {.noincremental}
+
+**Exploratory Data Analysis** is the process of using visualizations and summary statistics to better understand the structure, patterns, and relationships in your data.
+
+. . .
+
+> The goal is to **ask questions** and let the data guide your understanding.
+
+## Our Toolkit {.noincremental}
+
+We need two R packages:
+
+::::: columns
+::: {.column width="50%"}
+### `tidyverse`
+
+A collection of packages for data wrangling and visualization including:
+
+-   `ggplot2` (plots)
+-   `dplyr` (data manipulation)
+-   `forcats` (factors)
+:::
+
+::: {.column width="50%"}
+### `openintro`
+
+A package from our textbook that includes:
+
+-   Practice datasets
+-   The `loan50` dataset we'll explore today
+:::
+:::::
+
+## Loading Libraries
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1|2"
+library(tidyverse)
+library(openintro)
+```
+
+. . .
+
+**Tip:** Always load your libraries at the top of your script!
+
+# Getting to Know the Data {background-color="#006CB3"}
+
+## The `loan50` Dataset {.noincremental}
+
+-   Data from **Lending Club**, a peer-to-peer lending platform
+-   Contains a sample of **50 loans**
+-   Each row (observation) = one individual loan
+-   Each column (variable) = a characteristic of that loan
+
+## Inspecting the Data with `glimpse()`
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|1"
+glimpse(loan50)
+```
+
+## Key Questions to Ask {.noincremental}
+
+When you first encounter a dataset, always ask:
+
+-   Where did this data come from?
+-   What does each row represent? (observational unit)
+-   How many observations are there?
+-   How many variables are there?
+-   What types of variables are present? (numerical vs. categorical)
+
+. . .
+
+**For `loan50`:** 50 observations, 18 variables from Lending Club.
+
+# Cleaning the Data {background-color="#006CB3"}
+
+## Step 1: Select Relevant Variables
+
+We don't need all 18 variables. Let's narrow it down to 9:
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1|2|3"
+loans <- loan50 |>
+  select(loan_amount, interest_rate, term, grade,
+         state, total_income, homeownership, loan_purpose, total_credit_limit)
+```
+
+. . .
+
+**What happened?**
+
+-   Created a new object called `loans`
+-   Used the **pipe** (`|>`) to pass `loan50` into `select()`
+-   Kept only the 9 columns we care about
+
+## Step 2: Convert Factor Variables
+
+Some variables are stored as `fct` (factor) — let's convert to character:
+
+```{r}
+#| echo: true
+loans <- loans |>
+  mutate_if(is.factor, as.character)
+```
+
+. . .
+
+Now we're ready to explore!
+
+## Our Cleaned Data
+
+```{r}
+#| echo: true
+glimpse(loans)
+```
+
+# Exploring Loan Amounts {background-color="#006CB3"}
+
+## Question: How big do loans tend to be?
+
+To answer this, we'll use:
+
+-   A **histogram** to visualize the distribution
+-   **Summary statistics** to quantify the center and spread
+
+## Building a Histogram
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1|2|3|4-8|9"
+#| output-location: slide
+loans |>
+  ggplot(aes(x = loan_amount)) +
+  geom_histogram() +
+  labs(
+    x = "Loan Amount ($)",
+    y = "Count",
+    title = "Distribution of Loan Amounts"
+  ) +
+  theme_minimal()
+```
+
+## Anatomy of a `ggplot` Call {.noincremental}
+
+``` r
+data |>                          # Start with data
+  ggplot(aes(x = variable)) +   # Set up the canvas
+  geom_histogram() +             # Add the geometry
+  labs(x = "", y = "",           # Add labels
+       title = "") +
+  theme_minimal()                # Apply a clean theme
+```
+
+. . .
+
+Each piece is a **layer** added with `+`
+
+## Summary Statistics
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1|2|3-8"
+loans |>
+  filter(!is.na(loan_amount)) |>
+  summarise(
+    mean = mean(loan_amount),
+    median = median(loan_amount),
+    sd = sd(loan_amount),
+    Q1 = quantile(loan_amount, 0.25),
+    Q3 = quantile(loan_amount, 0.75)
+  )
+```
+
+## Reading the Distribution {.noincremental}
+
+When describing a distribution, always mention:
+
+-   **Shape:** Is it symmetric, skewed left, or skewed right?
+-   **Center:** What is the typical value? (mean and median)
+-   **Spread:** How variable are the values? (standard deviation, IQR)
+-   **Outliers:** Are there any unusual observations?
+
+# Comparing Groups {background-color="#006CB3"}
+
+## Question: Does loan size differ by homeownership?
+
+We can split our histogram by a categorical variable using `facet_wrap()`.
+
+## Faceted Histogram
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1-8|9"
+#| output-location: slide
+loans |>
+  ggplot(aes(x = loan_amount)) +
+  geom_histogram() +
+  labs(
+    x = "Loan Amount ($)",
+    y = "Count",
+    title = "Loan Amounts by Homeownership Status"
+  ) +
+  theme_minimal() +
+  facet_wrap(~homeownership, nrow = 3)
+```
+
+## Grouped Summary Statistics
+
+Add `group_by()` before `summarise()` to get stats per group:
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1-2|3"
+loans |>
+  filter(!is.na(loan_amount)) |>
+  group_by(homeownership) |>
+  summarise(
+    mean = mean(loan_amount),
+    median = median(loan_amount),
+    sd = sd(loan_amount),
+    Q1 = quantile(loan_amount, 0.25),
+    Q3 = quantile(loan_amount, 0.75)
+  )
+```
+
+## How Many in Each Group?
+
+Use `count()` and `arrange()` to build a frequency table:
+
+```{r}
+#| echo: true
+loans |>
+  count(homeownership) |>
+  arrange(desc(n))
+```
+
+## Adding Proportions
+
+Use `mutate()` to calculate the proportion:
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1-3|4"
+loans |>
+  count(homeownership) |>
+  arrange(desc(n)) |>
+  mutate(proportion = n / sum(n))
+```
+
+# Exploring Relationships {background-color="#006CB3"}
+
+## Question: Does income predict loan size?
+
+We use a **scatter plot** when we have two numerical variables:
+
+-   **Predictor** (x-axis): `total_income`
+-   **Outcome** (y-axis): `loan_amount`
+
+## Scatter Plot
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1|2|3|4-8|9"
+#| output-location: slide
+loans |>
+  ggplot(aes(x = total_income, y = loan_amount)) +
+  geom_point() +
+  labs(
+    x = "Total Income ($)",
+    y = "Loan Amount ($)",
+    title = "Total Income vs. Loan Amount"
+  ) +
+  theme_minimal()
+```
+
+## Adding a Linear Model
+
+Use `geom_smooth(method = lm)` to overlay a regression line:
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1-3|4"
+#| output-location: slide
+loans |>
+  ggplot(aes(x = total_income, y = loan_amount)) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE) +
+  labs(
+    x = "Total Income ($)",
+    y = "Loan Amount ($)",
+    title = "Total Income vs. Loan Amount with Linear Model"
+  ) +
+  theme_minimal()
+```
+
+## Getting the Equation
+
+The `lm()` function gives us the **intercept** and **slope**:
+
+```{r}
+#| echo: true
+lm(data = loans, formula = loan_amount ~ total_income)
+```
+
+. . .
+
+The general form of the equation is:
+
+$$\hat{y} = b_0 + b_1 \times x$$
+
+## Correlation and R-Squared
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1|2-7|8-10"
+loans |>
+  summarise(
+    mean_income = mean(total_income),
+    sd_income = sd(total_income),
+    mean_loan = mean(loan_amount),
+    sd_loan = sd(loan_amount),
+    r = cor(loan_amount, total_income)
+  ) |>
+  mutate(
+    r_squared = r^2
+  )
+```
+
+## Interpreting the Model {.noincremental}
+
+**Slope** → Direction of the association
+
+-   Positive slope = as x increases, y tends to increase
+-   Negative slope = as x increases, y tends to decrease
+
+. . .
+
+**R-squared** → Strength of the association
+
+-   Tells us the proportion of variability in y explained by x
+-   Closer to 1 = stronger linear relationship
+-   Closer to 0 = weaker linear relationship
+
+# Categorical Data {background-color="#006CB3"}
+
+## Question: Why are people getting loans?
+
+For categorical data, we use **bar charts** and **frequency tables**.
+
+## Bar Chart of Loan Purpose
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1|2|3|4-8|9"
+#| output-location: slide
+loans |>
+  ggplot(aes(y = fct_rev(fct_infreq(loan_purpose)))) +
+  geom_bar() +
+  labs(
+    x = "Count",
+    y = "Loan Purpose",
+    title = "Purposes of Loans in Our Sample"
+  ) +
+  theme_minimal()
+```
+
+## A Helpful Trick: `fct_infreq()` {.noincremental}
+
+``` r
+aes(y = fct_rev(fct_infreq(loan_purpose)))
+```
+
+-   `fct_infreq()` → orders the categories by frequency
+-   `fct_rev()` → reverses the order so the most frequent is at the top
+
+. . .
+
+This makes bar charts **much easier to read**!
+
+## Supporting Frequency Table
+
+```{r}
+#| echo: true
+loans |>
+  count(loan_purpose) |>
+  arrange(desc(n))
+```
+
+# Key Takeaways {background-color="#006CB3"}
+
+## The EDA Workflow {.noincremental}
+
+1.  **Load** your libraries and data
+2.  **Inspect** the data (`glimpse()`, `view()`)
+3.  **Clean** the data (`select()`, `mutate()`)
+4.  **Ask a question**
+5.  **Visualize** (histogram, bar chart, scatter plot)
+6.  **Summarize** (mean, median, sd, correlation)
+7.  **Interpret** and communicate your findings
+8.  **Repeat** with new questions!
+
+## Functions We Learned {.noincremental}
+
+::::: columns
+::: {.column width="50%"}
+### Data Wrangling
+
+-   `glimpse()`
+-   `select()`
+-   `mutate()`
+-   `filter()`
+-   `group_by()`
+-   `summarise()`
+-   `count()`
+-   `arrange()`
+:::
+
+::: {.column width="50%"}
+### Visualization
+
+-   `ggplot()` + `aes()`
+-   `geom_histogram()`
+-   `geom_bar()`
+-   `geom_point()`
+-   `geom_smooth()`
+-   `facet_wrap()`
+-   `labs()`
+-   `theme_minimal()`
+:::
+:::::
+
+## Now It's Your Turn! {.noincremental}
+
+Open the tutorial file and work through each section.
+
+Remember:
+
+-   🔴 **Red boxes** = edit and/or run code
+-   🔵 **Blue boxes** = answer a question
+
+. . .
+
+**Happy exploring!**
